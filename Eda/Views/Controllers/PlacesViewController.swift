@@ -27,9 +27,7 @@ class PlacesViewController: UIViewController {
         let cellIdent = "cell_place"
         tableView.register(UINib(nibName: "PlaceCell", bundle: nil), forCellReuseIdentifier: cellIdent)
         
-        //Outputs
-        
-        viewModel.items
+        viewModel.outputs.items
             .bind(to: tableView.rx.items(cellIdentifier: cellIdent, cellType: PlaceCell.self)) { _, model, cell in
                 cell.nameLabel.text = model.name
                 cell.descriptionLabel.text = model.description
@@ -39,20 +37,18 @@ class PlacesViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.isLoading
+        viewModel.outputs.isLoading
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         
-        viewModel.requestError
+        viewModel.outputs.requestError
             .subscribe(onNext: { [weak self] _ in
                 self?.showErrorAlert()
             })
             .disposed(by: disposeBag)
         
-        //Inputs
-        
         refreshControl.rx.controlEvent(.valueChanged)
-            .bind(to: viewModel.pulledToRefresh)
+            .bind(to: viewModel.inputs.pulledToRefresh)
             .disposed(by: disposeBag)
         
         clearBarButtonItem.rx.tap
@@ -61,7 +57,7 @@ class PlacesViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.viewDidLoad.onNext(())
+        viewModel.inputs.viewDidLoad.onNext(())
         
     }
 
@@ -72,7 +68,7 @@ class PlacesViewController: UIViewController {
         )
         alertController.addAction(
             UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
-                self?.viewModel.repeatClicked.onNext(())
+                self?.viewModel.inputs.repeatClicked.onNext(())
             })
         )
         present(alertController, animated: true, completion: nil)
@@ -85,7 +81,7 @@ class PlacesViewController: UIViewController {
         )
         alertController.addAction(
             UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
-                self?.viewModel.clearCacheClicked.onNext(())
+                self?.viewModel.inputs.clearCacheClicked.onNext(())
             })
         )
         present(alertController, animated: true, completion: nil)

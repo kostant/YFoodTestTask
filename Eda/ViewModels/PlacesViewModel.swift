@@ -9,21 +9,25 @@
 import RxSwift
 import Action
 
-protocol PlacesViewModelType {
-    
-    //Inputs
+protocol PlacesViewModelInputs {
     var viewDidLoad: AnyObserver<Void> { get }
     var pulledToRefresh: AnyObserver<Void> { get }
     var repeatClicked: AnyObserver<Void> { get }
     var clearCacheClicked: AnyObserver<Void> { get }
-    
-    //Outputs
+}
+
+protocol PlacesViewModelOutputs {
     var items: Observable<[PlaceCellViewModel]> { get }
     var isLoading: Observable<Bool> { get }
     var requestError: Observable<Void> { get }
 }
 
-struct PlacesViewModel: PlacesViewModelType {
+protocol PlacesViewModelType {
+    var inputs: PlacesViewModelInputs { get }
+    var outputs: PlacesViewModelOutputs { get }
+}
+
+struct PlacesViewModel: PlacesViewModelInputs, PlacesViewModelOutputs, PlacesViewModelType {
     
     private let disposeBag = DisposeBag()
     
@@ -79,6 +83,14 @@ struct PlacesViewModel: PlacesViewModelType {
                 imageLoader.clearCache()
             }
         }
+    }
+    
+    var inputs: PlacesViewModelInputs {
+        return self
+    }
+    
+    var outputs: PlacesViewModelOutputs {
+        return self
     }
     
 }
