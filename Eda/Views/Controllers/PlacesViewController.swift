@@ -62,7 +62,11 @@ class PlacesViewController: UIViewController {
     }
 
     func showErrorAlert() {
-        let alertController = UIAlertController(title: "Ошибка", message: "Что-то пошло не так, не удалось выполнить запрос.", preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: "Ошибка",
+            message: "Что-то пошло не так, не удалось выполнить запрос.",
+            preferredStyle: .alert
+        )
         alertController.addAction(
             UIAlertAction(title: "Закрыть", style: .cancel, handler: nil)
         )
@@ -75,7 +79,11 @@ class PlacesViewController: UIViewController {
     }
     
     func showClearAlert() {
-        let alertController = UIAlertController(title: "Подтверждение", message: "Очистить кеш изображений?", preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: "Подтверждение",
+            message: "Очистить кеш изображений?",
+            preferredStyle: .alert
+        )
         alertController.addAction(
             UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         )
