@@ -58,10 +58,13 @@ struct PlacesViewModel: PlacesViewModelInputs, PlacesViewModelOutputs, PlacesVie
         items = action.elements
             .map { places in
                 return places.map {
-                    let imagePath = $0.imagePath.replacingOccurrences(of: "{w}", with: imageWidth).replacingOccurrences(of: "{h}", with: imageHeight)
-                    return PlaceCellViewModel(name: $0.name,
-                                              description: $0.description,
-                                              image: imageLoader.image(path: imagePath).startWith(nil)
+                    let imagePath = $0.imagePath
+                        .replacingOccurrences(of: "{w}", with: imageWidth)
+                        .replacingOccurrences(of: "{h}", with: imageHeight)
+                    return PlaceCellViewModel(
+                        name: $0.name,
+                        description: $0.description,
+                        image: imageLoader.image(path: imagePath).startWith(nil)
                     )
                  }
             }
