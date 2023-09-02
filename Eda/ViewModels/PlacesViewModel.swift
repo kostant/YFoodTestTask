@@ -48,10 +48,7 @@ struct PlacesViewModel: PlacesViewModelInputs, PlacesViewModelOutputs, PlacesVie
             return apiService.places(lat: 55.762885, lon: 37.597360)
                 .observeOn(MainScheduler.instance)
         }
-        
-        viewDidLoad = action.inputs.asObserver()
-        pulledToRefresh = action.inputs.asObserver()
-        repeatClicked = action.inputs.asObserver()
+       
         
         let imageWidth = String(Int(PlaceCell.imageWidth * UIScreen.main.scale))
         let imageHeight = String(Int(PlaceCell.imageHeight * UIScreen.main.scale))
