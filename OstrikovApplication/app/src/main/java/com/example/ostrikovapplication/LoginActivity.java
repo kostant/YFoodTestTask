@@ -24,7 +24,16 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Error password", Snackbar.LENGTH_LONG).show();
+                String login = loginEditText.getText().toString();
+                String password = passwwordEditText.getText().toString();
+                if(login == "student" && password ==  "student2023@")
+                {
+                    Snackbar.make(view, "Password  corrected!", Snackbar.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Snackbar.make(view, "Error password", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
     }
