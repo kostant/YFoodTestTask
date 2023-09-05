@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String login = loginEditText.getText().toString();
                 String password = passwwordEditText.getText().toString();
-                if(login == "student" && password ==  "student2023@")
+                if(login.equals("student") && password.equals("student2023@"))
                 {
                     Snackbar.make(view, "Password  corrected!", Snackbar.LENGTH_LONG).show();
                 }
